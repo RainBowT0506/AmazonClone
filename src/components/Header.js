@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import {
-  MenuIcon,
+  Bars3Icon,
   MagnifyingGlassIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
@@ -47,13 +47,29 @@ function Header() {
             <span
               className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-400 text-center rounded-full 
             text-black font-bold"
-            >0</span>
+            >
+              0
+            </span>
             <ShoppingCartIcon className="h-10" />
             <p className="font-extrabold md:text-sm hidden md:inline mt-2">
               Basket
             </p>
           </div>
         </div>
+      </div>
+
+      {/* Bottom nav */}
+      <div className="flex items-center space-x-3 p-2 pl-6 bg-amazon_blue-light text-white text-sm">
+        <p className="link flex items-center">
+          <Bars3Icon className="h-6 mr-1" />
+          全部
+        </p>
+        <p className="link">今日優惠</p>
+        <p className="link">客戶服務部</p>
+        <p className="link">禮品單</p>
+        <p className="link hidden lg:inline-flex">禮品卡</p>
+        <p className="link hidden lg:inline-flex">我要開店</p>
+        <p className="link hidden lg:inline-flex">身障客戶支援</p>
       </div>
     </header>
   );
