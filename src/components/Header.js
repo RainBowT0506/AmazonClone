@@ -5,6 +5,7 @@ import {
   MagnifyingGlassIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
+import { RESOURCE_DOMAIN } from "../Constant";
 
 function Header() {
   return (
@@ -14,7 +15,7 @@ function Header() {
         {/* Logo */}
         <div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
           <Image
-            src="https://links.papareact.com/f90"
+            src={RESOURCE_DOMAIN + "/f90"}
             width={150}
             height={40}
             objectFit="contained"
