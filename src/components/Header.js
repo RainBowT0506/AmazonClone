@@ -7,9 +7,10 @@ import {
 } from "@heroicons/react/24/outline";
 import { RESOURCE_DOMAIN } from "../Constant";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 function Header() {
-
+  const router = useRouter();
   return (
     <header>
       {/* Top nav */}
@@ -17,6 +18,7 @@ function Header() {
         {/* Logo */}
         <div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
           <Image
+            onClick={() => router.push("/")}
             src={RESOURCE_DOMAIN + "/f90"}
             width={150}
             height={40}
@@ -36,6 +38,7 @@ function Header() {
 
         {/* Right */}
         <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
+          {/* Login/Logout */}
           <div onClick={signIn} className="link">
             <p>Hello RainBowT</p>
             <p className="font-extrabold md:text-sm">Account & Lists</p>
@@ -46,7 +49,11 @@ function Header() {
             <p className="font-extrabold md:text-sm">& Orders</p>
           </div>
 
-          <div className="link relative flex items-center">
+          {/* Shopping Cart */}
+          <div
+            onClick={() => router.push("/checkout")}
+            className="link relative flex items-center"
+          >
             <span
               className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-400 text-center rounded-full 
             text-black font-bold"
