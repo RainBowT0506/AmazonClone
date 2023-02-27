@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { useSelector } from "react-redux";
+import CheckoutProduct from "../components/CheckoutProduct";
 import Header from "../components/Header";
 import { RESOURCE_DOMAIN } from "../Constant";
 import { selectItems } from "../slices/basketSlice";
@@ -24,10 +25,22 @@ function Checkout() {
             <h1 className="text-3xl border-b pb-4">
               {items.length === 0
                 ? "Your Amazon Baseket is empty."
-                : " Shopping Basket"}
+                : "Shopping Basket"}
             </h1>
 
-            
+            {items.map((item, i) => (
+              <CheckoutProduct
+                key={i}
+                id={item.id}
+                title={item.title}
+                rating={item.rating}
+                price={item.price}
+                description={item.description}
+                category={item.category}
+                image={item.image}
+                hasPrime={item.hasPrime}
+              />
+            ))}
           </div>
         </div>
         {/* Right */}
