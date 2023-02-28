@@ -4,10 +4,12 @@ import { useSelector } from "react-redux";
 import CheckoutProduct from "../components/CheckoutProduct";
 import Header from "../components/Header";
 import { RESOURCE_DOMAIN } from "../Constant";
-import { selectItems } from "../slices/basketSlice";
+import { selectItems, selectTotal } from "../slices/basketSlice";
+import Currency from "react-currency-formatter";
 
 function Checkout() {
   const items = useSelector(selectItems);
+  const total = useSelector(selectTotal);
   return (
     <div className="bg-gray-100">
       <Header />
@@ -49,7 +51,9 @@ function Checkout() {
             <>
               <h2 className="whitespace-nowrap">
                 Subtotal ({items.length} items):
-                <span className="font-bold"></span>
+                <span className="font-bold">
+                  <Currency quantity={total} currency="GBP"/>
+                </span>
               </h2>
 
               {/* <button
