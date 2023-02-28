@@ -1,12 +1,15 @@
 // import { useSession } from "next-auth/react";
 import React from "react";
+import { useSelector } from "react-redux";
 import Header from "../components/Header";
+import Order from "../components/Order";
+import { selectOrderItems } from "../slices/orderSlice";
 // import moment from "moment";
 // import db from "../../firebase"
 
-function Orders({ orders }) {
+function Orders() {
   // const [session] = useSession();
-
+  const orders = useSelector(selectOrderItems);
   return (
     <div>
       <Header />
@@ -16,8 +19,15 @@ function Orders({ orders }) {
         </h1>
 
         <div className="mt-5 space-y-4">
-          {orders?.map((order) =>(
-            <Order/>
+          {orders?.map((order) => (
+            <Order
+              id={order.orderId}
+              amount={order.amount}
+              amountShipping={order.amountShipping}
+              items={order.orderItems}
+              timestamp={order.timestamp}
+              images={order.images}
+            />
           ))}
         </div>
       </main>

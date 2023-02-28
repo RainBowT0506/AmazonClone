@@ -4,20 +4,28 @@ import { useDispatch, useSelector } from "react-redux";
 import CheckoutProduct from "../components/CheckoutProduct";
 import Header from "../components/Header";
 import { RESOURCE_DOMAIN } from "../Constant";
-import { selectItems, selectTotal } from "../slices/basketSlice";
+import {
+  removeAllFromBasket,
+  selectItems,
+  selectTotal,
+} from "../slices/basketSlice";
 import Currency from "react-currency-formatter";
 import { loadStripe } from "@stripe/stripe-js";
 import { addToOrder, selectOrderItems } from "../slices/orderSlice";
+import { useRouter } from "next/router";
 
 const stripePromise = loadStripe();
 function Checkout() {
   const items = useSelector(selectItems);
   const total = useSelector(selectTotal);
+  const router = useRouter();
+
   const session = useState(true);
 
   const dispatch = useDispatch();
 
   const id = useSelector(selectOrderItems);
+
   function renderBasket() {
     return (
       <div className="flex-grow m-5 shadow-sm">
@@ -81,16 +89,25 @@ function Checkout() {
   }
 
   const checkoutToOrderHistory = () => {
-    let orderId = id.length + 1
+    let orderId = id.length + 1;
     let amount = total;
     let amountShipping = 0.99;
     let orderItems = items.length;
     let timestamp = Date.now();
     let images = items.map(({ image }) => image);
 
-    const order = { orderId, amount, amountShipping, orderItems, timestamp, images };
+    const order = {
+      orderId,
+      amount,
+      amountShipping,
+      orderItems,
+      timestamp,
+      images,
+    };
     console.log("checkoutToOrderHistory", order);
     dispatch(addToOrder(order));
+    dispatch(removeAllFromBasket());
+    router.push("/success");
   };
 
   return (

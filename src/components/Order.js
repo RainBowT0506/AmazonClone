@@ -1,5 +1,6 @@
 import moment from "moment/moment";
 import React from "react";
+import Currency from "react-currency-formatter";
 
 function Order({ id, amount, amountShipping, items, timestamp, images }) {
   return (
@@ -19,7 +20,7 @@ function Order({ id, amount, amountShipping, items, timestamp, images }) {
         </div>
 
         <p className="text-sm whitespace-nowrap sm:text-xl self-end flex-1 text-right text-blue-500">
-          {items.length} items
+          {items} items
         </p>
 
         <p className="absolute top-2 right-2 w-40 lg:w-72 truncate text-xs whitespace-nowrap">
@@ -31,6 +32,7 @@ function Order({ id, amount, amountShipping, items, timestamp, images }) {
         <div className="flex space-x-6 overflow-x-auto">
           {images.map((image) => (
             <img
+              loading="lazy"
               src={image}
               alt="image"
               className="h-20 object-contain sm:h-32"
