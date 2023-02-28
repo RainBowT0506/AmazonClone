@@ -1,8 +1,8 @@
 // import { useSession } from "next-auth/react";
 import React from "react";
 import Header from "../components/Header";
-import moment from "moment";
-import db from "../../firebase"
+// import moment from "moment";
+// import db from "../../firebase"
 
 function Orders({ orders }) {
   // const [session] = useSession();
@@ -15,7 +15,11 @@ function Orders({ orders }) {
           Your Orders
         </h1>
 
-        <div className="mt-5 space-y-4"></div>
+        <div className="mt-5 space-y-4">
+          {orders?.map((order) =>(
+            <Order/>
+          ))}
+        </div>
       </main>
     </div>
   );
