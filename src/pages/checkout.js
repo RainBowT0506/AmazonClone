@@ -1,15 +1,18 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import CheckoutProduct from "../components/CheckoutProduct";
 import Header from "../components/Header";
 import { RESOURCE_DOMAIN } from "../Constant";
 import { selectItems, selectTotal } from "../slices/basketSlice";
 import Currency from "react-currency-formatter";
+import {loadStripe} from "@stripe/stripe-js"
 
+const stripePromise = loadStripe()
 function Checkout() {
   const items = useSelector(selectItems);
   const total = useSelector(selectTotal);
+  const session = useState(true);
   return (
     <div className="bg-gray-100">
       <Header />
@@ -52,19 +55,20 @@ function Checkout() {
               <h2 className="whitespace-nowrap">
                 Subtotal ({items.length} items):
                 <span className="font-bold">
-                  <Currency quantity={total} currency="GBP"/>
+                  <Currency quantity={total} currency="GBP" />
                 </span>
               </h2>
 
-              {/* <button
+              <button
+                role="link"
                 disabled={!session}
                 className={`button mt-2 ${
                   !session &&
                   "from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed"
                 }`}
               >
-                {!session ? "Sign in to checkout":"Proceed to checkout"}
-              </button> */}
+                {!session ? "Sign in to checkout" : "Proceed to checkout"}
+              </button>
             </>
           )}
         </div>
