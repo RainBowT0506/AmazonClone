@@ -15,40 +15,58 @@ function Header() {
   const router = useRouter();
   const items = useSelector(selectItems);
 
+  function renderLogo() {
+    return (
+      <div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
+        <Image
+          onClick={() => router.push("/")}
+          src={RESOURCE_DOMAIN + "/f90"}
+          width={150}
+          height={40}
+          style={{ objectFit: "contain" }}
+          className="cursor-pointer"
+        />
+      </div>
+    );
+  }
+
+  function renderSearch() {
+    return (
+      <div className="hidden sm:flex items-center h-10 rounded-md flex-grow cursor-pointer bg-yellow-400 hover:bg-yellow-500 ml-5">
+        <input
+          className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
+          type="text"
+        />
+        <MagnifyingGlassIcon className="h-12 p-4" />
+      </div>
+    );
+  }
+
+  function renderLoginAndLogout() {
+    return (
+      <div onClick={signIn} className="link">
+        <p>Hello RainBowT</p>
+        <p className="font-extrabold md:text-sm">Account & Lists</p>
+      </div>
+    );
+  }
+
   return (
     <header>
       {/* Top nav */}
       <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2">
         {/* Logo */}
-        <div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
-          <Image
-            onClick={() => router.push("/")}
-            src={RESOURCE_DOMAIN + "/f90"}
-            width={150}
-            height={40}
-            style={{ objectFit: "contain" }}
-            className="cursor-pointer"
-          />
-        </div>
+        {renderLogo()}
 
         {/* Search */}
-        <div className="hidden sm:flex items-center h-10 rounded-md flex-grow cursor-pointer bg-yellow-400 hover:bg-yellow-500 ml-5">
-          <input
-            className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
-            type="text"
-          />
-          <MagnifyingGlassIcon className="h-12 p-4" />
-        </div>
+        {renderSearch()}
 
         {/* Right */}
         <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
           {/* Login/Logout */}
-          <div onClick={signIn} className="link">
-            <p>Hello RainBowT</p>
-            <p className="font-extrabold md:text-sm">Account & Lists</p>
-          </div>
+          {renderLoginAndLogout()}
 
-          <div className="link">
+          <div onClick={() => router.push("/orders")} className="link">
             <p>Return</p>
             <p className="font-extrabold md:text-sm">& Orders</p>
           </div>
